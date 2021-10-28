@@ -1,0 +1,6 @@
+FROM node:16
+
+ENV PYTHONUNBUFFERED=true
+
+WORKDIR /app
+ENTRYPOINT ["./run.py"]
