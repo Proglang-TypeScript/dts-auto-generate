@@ -29,7 +29,9 @@ Pros: Will figure out type inference heuristics automatically.
 
 Cons: I have little experience with machine learning algorithms and their applications. The toughest problem will probably be to encode JavaScript code into a suitable format.
 
-TODO: Look for related work exploring this direction. There is definitely a paper about inferring types based on variable names.
+TODO: Look for related work exploring this direction.
+
+[NL2Type: Inferring JavaScript Function Types from Natural Language Information](https://ieeexplore.ieee.org/document/8811893) uses parameter names, function names and documentation (comments) to infer types.
 
 ### Combined "symbolic execution" and dynamic analysis
 
@@ -48,3 +50,8 @@ In Jalangi2 there is an option to override the result of conditions. This gives 
 Perhaps the impact of exploring invalid branch combinations is not that high for type inference.
 
 [TSTest](https://cs.au.dk/~amoeller/papers/tstest/) is a relevant tool/paper on how to generate tests for JavaScript libraries based on TypeScript declaration files. The tool essentially generates function arguments based on the declared types, runs the functions, and then checks whether the return value matches the type specified in the declaration file.
+
+[Python probabilistic type inference with natural language support](https://dl.acm.org/doi/abs/10.1145/2950290.2950343) combines a machine learning algorithm for learning types based on variable names with "probabilistic inference" based on data-flow, attribute accesses and explicit type checks.
+The presentation is mathematically detailed.
+We should be careful that our work does not end up as a worse version of this.
+
