@@ -51,34 +51,33 @@ for(const {name, values} of types) {
 	workingTypes.push({name, returns: [...returnedValues]});
 }
 
+let out = '';
+
 if(workingTypes.length == 0) {
-	console.log(`${MOD_NAME} does not exit without an exception for any of our provided types`);
-	return;
+	out = `${MOD_NAME} does not exit without an exception for any of our provided types\n`;
+} else {
+    const returnTypeToArgType = {};
+    for(const {name, returns} of workingTypes) {
+        for(const retVal of returns) {
+            const retType = typeof retVal;
+            if(!(retType in returnTypeToArgType))
+                returnTypeToArgType[retType] = new Set();
+
+            returnTypeToArgType[retType].add(name);
+        }
+    }
+
+    for(const [retType, argTypes] of Object.entries(returnTypeToArgType)) {
+        const optional = argTypes.delete('undefined');
+        let typeStr = [...argTypes].join(' | ');
+        if(optional) {
+            if(argTypes.size == 0) typeStr = 'undefined';
+            else if(argTypes.size == 1) typeStr += '?';
+            else typeStr = `(${typeStr})?`;
+        }
+
+        out += `function ${MOD_NAME}(${$args(mod)[0]}: ${typeStr}) -> ${retType}\n`;
+    }
 }
 
-const returnTypeToArgType = {};
-for(const {name, returns} of workingTypes) {
-	for(const retVal of returns) {
-		const retType = typeof retVal;
-		if(!(retType in returnTypeToArgType))
-			returnTypeToArgType[retType] = new Set();
-
-		returnTypeToArgType[retType].add(name);
-	}
-}
-
-for(const [retType, argTypes] of Object.entries(returnTypeToArgType)) {
-	const optional = argTypes.delete('undefined');
-	let typeStr = [...argTypes].join(' | ');
-	if(optional) {
-		if(argTypes.size == 1) typeStr += '?';
-		else typeStr = `(${typeStr})?`;
-	}
-
-	console.log(`function ${MOD_NAME}(${$args(mod)[0]}: ${typeStr}) -> ${retType}`);
-}
-
-// TODO: This is considered bad practice, but I don't know how we're supposed to exit
-// otherwise, as the library might set up things to run on the event loop.
-const t = setTimeout(() => process.exit(0), 1000);
-t.unref();
+fs.writeFileSync('out.txt', out);
