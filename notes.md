@@ -55,3 +55,24 @@ Perhaps the impact of exploring invalid branch combinations is not that high for
 The presentation is mathematically detailed.
 We should be careful that our work does not end up as a worse version of this.
 
+There are two different and slightly separate concerns that need to be implemented:
+
+1) We must be able to infer types for arguments based on how they are used - most likely guided by heuristics such as the one from Fernando's Master thesis.
+
+2. We must generate code examples that exercise the library in such a way that we obtain a high degree of code coverage.
+
+#### Type inference heuristics based on variable usage
+
+Ideas:
+
+* Comparing the result of `typeof x` with something gives a strong hint wrt. primitive types.
+* The same idea can be used to infer class types with `instanceof` .
+* Field accesses and method calls indicate (an) object type.
+  Possibly also Array/String/Number.
+* Fernando's Master thesis gives heuristics about types of values involved in binary operators. `+` is used for both strings and numbers, others are mostly used with numbers (with the exception of equality checking operators).
+
+TODO: Look into [Jan Vitek et al.: An analysis of the dynamic behavior of JavaScript programs](https://dl.acm.org/doi/pdf/10.1145/1806596.1806598?casa_token=k8dJKmYxdDQAAAAA:j9tOkPEY_ge_NHhKdDFwCNHQn-yvprFRtnCnJb5IvOQJm7EK0jt2NlP1mr7NUPBzZPozXu8chQIqnR4) to see if there is some useful heuristics we can use.
+
+#### Gaining high code coverage
+
+TODO
