@@ -2,7 +2,7 @@
 
 ## Goal
 
-We want to generate TypeScript declaration files for JavaScript libraries **without** relying on pre-written code examples.
+We want to generate TypeScript declaration files for JavaScript libraries **without** relying on code examples or tests provided by the library's authors.
 
 Using such code examples are problematic because they are:
 
@@ -13,9 +13,14 @@ Using such code examples are problematic because they are:
 
 ### Static analysis of the JavaScript library
 
-Pros: Does not require code examples by design.
+Pros:
 
-Cons: Requires development of a custom, lightweight static analysis. Current "general" static analysis tools for JS do not scale well (I think). It might also be hard to get a sufficient degree of precision.
+* Does not require code examples by design.
+
+Cons:
+
+* Requires development of a custom, lightweight static analysis. Current "general" static analysis tools for JS do not scale well (I think). It might also be hard to get a sufficient degree of precision.
+* A separate static analysis tool requires continual maintenance to stay abreast with JavaScript extensions.
 
 See e.g.: [TSInfer](https://cs.au.dk/~amoeller/papers/tstools/), which is a continuation of TSCheck.
 I think we will have a hard time with implementing a *better* static analysis than what they use in TSInfer. Maybe we could improve upon their work, but in that case I think it would be hard to argue for novelty.
@@ -33,6 +38,17 @@ TODO: Look for related work exploring this direction.
 
 [NL2Type: Inferring JavaScript Function Types from Natural Language Information](https://ieeexplore.ieee.org/document/8811893) uses parameter names, function names and documentation (comments) to infer types.
 
+PT here is a thought:
+
+* the problem is to translate the type inference problem into a setting usable for machine learning; i.e. we need to translate the problem into a vector of numbers and we need training data to establish ground truth
+* now: take a module which comes with a declaration file on Definitely Typed (DT), generate some sample inputs based on the declared types (IIRC this functionality is essentially provided by TSCheck)
+* new element: trace the interactions of input value with type T and record which operations are applied to that value.
+* this results for each x:T in a **vector** with one entry for each operation (which operations are most telling is TBD; accessing object properties might have to be handled separately, things could be normalized by mapping property names to some standard names)
+* doing this for many DT modules results in many such vectors for each type T --> this is our training data
+* based on this select and train the proper neural net
+* for a new module, we obtain the set of interactions on each input and ask the net for the likely types!
+
+
 ### Combined "symbolic execution" and dynamic analysis
 
 We can build on the original dynamic analysis idea of *dts-generate*. We will add some way to automatically generate interesting test cases or otherwise explore the library code with good coverage. Based on the dynamically observed *interactions* we can infer types.
@@ -43,21 +59,23 @@ Cons: The quality of the output will rely a lot on how well we can exercise the 
 
 We do not want to do standard symbolic execution, as this would require us to implement a JavaScript interpreter.
 
-The current *dts-generate* approach does (to my understanding) use the runtime types of argument values for type inference in a lot of cases. We do not have access to such values in our case, so type inference should be based solely on usage (patterns).
+The current *dts-generate* approach does (to my understanding / PJT: correct) use the runtime types of argument values for type inference in a lot of cases. We do not have access to such values in our case, so type inference should be based solely on usage (patterns).
 *dts-generate* also assumes that the code examples represent valid uses of the library. We will likely end up exploring code paths that correspond to error handling (due to e.g. wrong argument types) or otherwise unintended usage of the functions.
 
 In Jalangi2 there is an option to override the result of conditions. This gives an easy way to recursively explore all possible branches in the code. Aside from the path explosion problem, you also encounter the issue that you are exploring branching pairs that are impossible in practice. Maybe an SMT solver could be used to figure out when branch combinations are invalid, but due to JavaScript's dynamic nature, I think this would be extremely difficult.
 Perhaps the impact of exploring invalid branch combinations is not that high for type inference.
+(PJT: I agree. The issue is that you have to take into account all the implicit conversions before you obtain clean formulas for an SMT solver.)
 
 [TSTest](https://cs.au.dk/~amoeller/papers/tstest/) is a relevant tool/paper on how to generate tests for JavaScript libraries based on TypeScript declaration files. The tool essentially generates function arguments based on the declared types, runs the functions, and then checks whether the return value matches the type specified in the declaration file.
 
 [Python probabilistic type inference with natural language support](https://dl.acm.org/doi/abs/10.1145/2950290.2950343) combines a machine learning algorithm for learning types based on variable names with "probabilistic inference" based on data-flow, attribute accesses and explicit type checks.
 The presentation is mathematically detailed.
 We should be careful that our work does not end up as a worse version of this.
+(PJT: I was not aware of this paper. Would you want to discuss it in a Friday seminar?)
 
 There are two different and slightly separate concerns that need to be implemented:
 
-1) We must be able to infer types for arguments based on how they are used - most likely guided by heuristics such as the one from Fernando's Master thesis.
+1. We must be able to infer types for arguments based on how they are used - most likely guided by heuristics such as the one from Fernando's Master thesis.
 
 2. We must generate code examples that exercise the library in such a way that we obtain a high degree of code coverage.
 
@@ -70,6 +88,7 @@ Ideas:
 * Field accesses and method calls indicate (an) object type.
   Possibly also Array/String/Number.
 * Fernando's Master thesis gives heuristics about types of values involved in binary operators. `+` is used for both strings and numbers, others are mostly used with numbers (with the exception of equality checking operators).
+* PJT: See the above ML-based idea to obtain more ideas about types from interactions.
 
 TODO: Look into [Jan Vitek et al.: An analysis of the dynamic behavior of JavaScript programs](https://dl.acm.org/doi/pdf/10.1145/1806596.1806598?casa_token=k8dJKmYxdDQAAAAA:j9tOkPEY_ge_NHhKdDFwCNHQn-yvprFRtnCnJb5IvOQJm7EK0jt2NlP1mr7NUPBzZPozXu8chQIqnR4) to see if there is some useful heuristics we can use.
 
