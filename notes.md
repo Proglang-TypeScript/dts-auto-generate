@@ -103,3 +103,35 @@ Therefore, I think it might be more beneficial to focus on the next problem.
 
 #### Gaining high code coverage
 
+My idea to solve this subproblem is the following:
+
+* View the dynamic analysis as a way to generate constraints for the input parameters.
+* Use the constraints to synthesize values that can drive the dynamic execution further.
+* When the constraints are fully saturated, use an approach akin to symbolic execution to explore different branches.
+
+In pseudocode:
+
+```python
+def rec(originalConstraints, symbolicExecutionIndex: int):
+    for branchResult in (False, True):
+        constraints = originalConstraints
+        
+        while True:
+            argumentValues = synthesizeValues(constraints)
+            # branchResult should also influence constraints somehow
+            # The branch with index `symbolicExecutionIndex` is hardwired to return `branchResult`
+            newConstraints = dynamicAnalysis(argumentValues)
+            if newConstraints <= constraints:
+                break
+            constraints = newConstraints
+		
+        if symbolicExecutionIndex + 1 < numBranches:
+            # are there more branches to explore?
+        	rec(constraints, symbolicExecutionIndex + 1)
+```
+
+The output of this code is not specified.
+
+Maybe we can join the constraints of different symbolic execution paths to generate a set of "super-constraints" that can be transformed into a type.
+
+Or maybe it's easier to output the synthesized values as tests and have some other tool generate the types from these.
