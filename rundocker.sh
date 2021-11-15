@@ -12,4 +12,4 @@ if ! sudo docker image inspect $IMGNAME > /dev/null; then
 	popd
 fi
 
-sudo docker run --rm -it -v $(pwd -P):/app $IMGNAME $@
+exec sudo docker run --rm -it -v $(pwd -P):/app $IMGNAME $@

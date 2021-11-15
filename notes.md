@@ -92,6 +92,14 @@ Ideas:
 
 TODO: Look into [Jan Vitek et al.: An analysis of the dynamic behavior of JavaScript programs](https://dl.acm.org/doi/pdf/10.1145/1806596.1806598?casa_token=k8dJKmYxdDQAAAAA:j9tOkPEY_ge_NHhKdDFwCNHQn-yvprFRtnCnJb5IvOQJm7EK0jt2NlP1mr7NUPBzZPozXu8chQIqnR4) to see if there is some useful heuristics we can use.
 
+Oskar: This subfield (type inference based on dynamic analysis) seems to have been thoroughly explored beforehand. See
+* [Trace Typing: An Approach for Evaluating Retrofitted Type Systems](https://drops.dagstuhl.de/opus/volltexte/2016/6095/)
+* [JSTrace: Run-time Type Discovery for JavaScript](http://static.cs.brown.edu/research/pubs/theses/ugrad/2010/saftoiu.pdf)
+* [Dynamic inference of static types for ruby](https://dl.acm.org/doi/abs/10.1145/1925844.1926437?casa_token=raqvsNKm37oAAAAA:bNdvboEFQMALD-QBLbWdH8xswXy0fkZu6BpGUliXYgg8-B1lkU8vvX0Vexo15N2_lMpRQRtV6kCZjUE)
+
+I think what we can contribute in novelty is limited to the use of heuristics.
+
+Therefore, I think it might be more beneficial to focus on the next problem.
+
 #### Gaining high code coverage
 
-TODO
