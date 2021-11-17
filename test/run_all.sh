@@ -5,20 +5,28 @@ set -euo pipefail
 TESTMOD="../testmodules"
 RTI="/rti"
 
-while read name; do
-	#if [ "$name" == "a-big-triangle" ] || [ "$name" == "a2hs.js" ]; then
-	#	continue
-	#fi
+trap 'exit 1' SIGINT
 
+function process() {
+	name=$1
 	dir="$TESTMOD/$name"
 	echo "$name: $dir"
-	timeout -k 2 2 "$RTI/bin/runNew" "$dir" "$name" || {
+	timeout -k 2 4 "$RTI/bin/runNew" "$dir" "$name" || {
 		code=$?
 		if [ $code -eq 124 ]; then
 			echo "timeout"
 		else
-			break
+			exit 1	
 		fi
 	}
 	echo
-done < "../works.txt"
+}
+
+if [[ -z "${1+x}" ]]; then
+	while read name; do
+		process "$name"
+	done < "../works.txt"
+else
+	process "$1"
+fi
+
