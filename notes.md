@@ -135,3 +135,11 @@ The output of this code is not specified.
 Maybe we can join the constraints of different symbolic execution paths to generate a set of "super-constraints" that can be transformed into a type.
 
 Or maybe it's easier to output the synthesized values as tests and have some other tool generate the types from these.
+
+##### Postponed problems
+
+* How do we handle functions that schedule actions on the event loop to run after the function returns?
+  This includes async functions/functions that return promises.
+* How do we discern between constructors and regular functions?
+  Perhaps we can use the convention that constructors have names in CamelCase.
+  Or we can check if the function assigns properties on `this`. This might also flag methods, though.
