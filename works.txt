@@ -11,7 +11,7 @@ apex.js
 api-error-handler
 arr-diff
 arr-union
-arrayify-stream
+#arrayify-stream
 asap
 async-cache
 async.nexttick
@@ -34,7 +34,7 @@ boolean-to-signed
 boolify-string
 bounds.js
 brace-expansion
-breeze
+#breeze
 bricks.js
 btoa
 btoa-lite
