@@ -4,7 +4,7 @@
 
 We want to generate TypeScript declaration files for JavaScript libraries **without** relying on code examples or tests provided by the library's authors.
 
-Using such code examples are problematic because they are:
+Using such code examples is problematic because they are:
 
 * Non-exhaustive. The library might contain additional exported functions that are not shown in the code examples. The functions that are shown in the examples may also have behaviours that are not properly explained in the code. (I imagine that) functions with many configuration options suffer a lot from this.
 * Stale. Code examples are not a part of the shipped library. Instead they serve as documentation. (From studies we know that) documentation material is susceptible to becoming stale, just as well as manually written TS declaration files (see e.g. TSEvolve).
@@ -25,6 +25,7 @@ Cons:
 See e.g.: [TSInfer](https://cs.au.dk/~amoeller/papers/tstools/), which is a continuation of TSCheck.
 I think we will have a hard time with implementing a *better* static analysis than what they use in TSInfer. Maybe we could improve upon their work, but in that case I think it would be hard to argue for novelty.
 We should evaluate our results against TSInfer's to show that we can infer more precise results than with static analysis!
+PT We should also compare with respect to space and time complexity.
 
 ### Machine learning
 
@@ -89,6 +90,10 @@ Ideas:
   Possibly also Array/String/Number.
 * Fernando's Master thesis gives heuristics about types of values involved in binary operators. `+` is used for both strings and numbers, others are mostly used with numbers (with the exception of equality checking operators).
 * PJT: See the above ML-based idea to obtain more ideas about types from interactions.
+* PJT: possibly, sequences of operations and compound operations on a value give more insight about its intended type. Examples
+  * (compound) `x+1` -> x:num with high likelyhood, althogh x:string would also give a result
+  * (compound) `typeof x === "string"` -> x:string intended, at least in the code guarded by this predicate
+  * (sequence) `x*y` and `x+z` -> x:num with very high likelyhood
 
 TODO: Look into [Jan Vitek et al.: An analysis of the dynamic behavior of JavaScript programs](https://dl.acm.org/doi/pdf/10.1145/1806596.1806598?casa_token=k8dJKmYxdDQAAAAA:j9tOkPEY_ge_NHhKdDFwCNHQn-yvprFRtnCnJb5IvOQJm7EK0jt2NlP1mr7NUPBzZPozXu8chQIqnR4) to see if there is some useful heuristics we can use.
 
@@ -143,3 +148,10 @@ Or maybe it's easier to output the synthesized values as tests and have some oth
 * How do we discern between constructors and regular functions?
   Perhaps we can use the convention that constructors have names in CamelCase.
   Or we can check if the function assigns properties on `this`. This might also flag methods, though.
+
+## Remarks (PT 20211129)
+
+* what do you mean with *output not specified*?
+* The main problem with all test-driven methods is that they compute under-approximations, even if we combine the results of several execution paths and argument variations. But at certain points, we liberally perform over-approximations, so that it is hard to argue formally about correctness in the end. In the end, we can ony argue quantitatively by comparing against some benchmark (ground truth, at best).
+* It would be best to reuse (and maybe improve) the transformation of traces to types and concentrate on improving coverage starting from as little as possible. Though any starting point should do - including example code.
+* What's the issue with constructors vs regular functions?
