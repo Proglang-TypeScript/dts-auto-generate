@@ -144,7 +144,7 @@ Or maybe it's easier to output the synthesized values as tests and have some oth
 ##### Postponed problems
 
 * How do we handle functions that schedule actions on the event loop to run after the function returns?
-  This includes async functions/functions that return promises.
+  This includes async functions and functions that return promises.
 * How do we discern between constructors and regular functions?
   Perhaps we can use the convention that constructors have names in CamelCase.
   Or we can check if the function assigns properties on `this`. This might also flag methods, though.
@@ -152,6 +152,9 @@ Or maybe it's easier to output the synthesized values as tests and have some oth
 ## Remarks (PT 20211129)
 
 * what do you mean with *output not specified*?
-* The main problem with all test-driven methods is that they compute under-approximations, even if we combine the results of several execution paths and argument variations. But at certain points, we liberally perform over-approximations, so that it is hard to argue formally about correctness in the end. In the end, we can ony argue quantitatively by comparing against some benchmark (ground truth, at best).
+  - I mean that displayed code computes something without returning a result. I.e. it is not specified how the computation can produce something useful.
+* The main problem with all test-driven methods is that they compute under-approximations, even if we combine the results of several execution paths and argument variations. But at certain points, we liberally perform over-approximations, so that it is hard to argue formally about correctness in the end. In the end, we can only argue quantitatively by comparing against some benchmark (ground truth, at best).
 * It would be best to reuse (and maybe improve) the transformation of traces to types and concentrate on improving coverage starting from as little as possible. Though any starting point should do - including example code.
+  - Yes, I think this is a good approach. In this case the output of our tool would be a set of test cases that can be fed into the `dts-generate` tool, right?
 * What's the issue with constructors vs regular functions?
+  - Invoking a constructor as a regular method means that `this` is bound to the global object inside the constructor, so any property writes will be performed on the global object. Additionally the constructor returns `undefined` instead of an object if called without `new`.
