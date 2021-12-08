@@ -1,68 +1,105 @@
 abs
 abs-svg-path
-absolute
-ajv-merge-patch
-apex.js
+# Not instrumented
+#absolute
+# Expects object from other library
+#ajv-merge-patch
+# Returns a function
+#apex.js
 api-error-handler
-arr-diff
+# Uses arguments
+#arr-diff
 arr-union
-async.nexttick
+# Not instrumented
+#async.nexttick
 atob-lite
-audio-context
-babel-plugin-syntax-jsx
-bem-classname
+# Expects window object
+#audio-context
+# No argument
+#babel-plugin-syntax-jsx
+# No argument
+#bem-classname
 binary-split
-bind-args
-blacklist
-blazy
-blockies
+# Returns a function
+#bind-args
+# Iteration over UNKNOWN proxy
+#blacklist
+# Expects window object
+#blazy
+# Infinite symbolic execution
+#blockies
 boolean-to-signed
 boolify-string
 brace-expansion
-bricks.js
+# No argument
+#bricks.js
 btoa
 btoa-lite
-bunyan-blackhole
+# Interactions happen after interaction with return value
+#bunyan-blackhole
 bunyan-config
-call-bind
+# Returns function
+#call-bind
 caller
-callsite
+# No argument
+#callsite
 camelcase-keys-deep
-chai-almost
-checkstyle-formatter
+# Returns function - would work with || detection
+#chai-almost
+# Disconnected trace due to .map
+#checkstyle-formatter
 clear
 color-rgba
 colormap
-combine-reducers
+# No argument
+#combine-reducers
 common-prefix
 compressible
 compute-argmax
-compute-gcd
-compute-lcm
+# No argument
+#compute-gcd
+# No argument
+#compute-lcm
 compute-stdev
 configurable
-connect-history-api-fallback
-connect-livereload
-connect-trim-body
-console-log-level
-cors
+# Interactions happen after interaction with return value
+#connect-history-api-fallback
+# Returns function - would work with || detection
+#connect-livereload
+# No argument
+#connect-trim-body
+# Value passed to indexOf - would also work with || detection
+#console-log-level
+# Expects function argument, also interactions happen after call to returned function
+#cors
 coverup
-create-html
+# Times out due to symbolic execution unsoundness
+#create-html
 css-to-style
 cwd
-d3-tip
-date-now
+# No argument
+#d3-tip
+# Not instrumented
+#date-now
 death
 decode-uri-component
-dedent
-deep-assign
-deep-extend
-deep-freeze
-deep-freeze-strict
-defer-promise
-defined
+# Infinite symbolic execution
+#dedent
+# Uses arguments
+#deep-assign
+# No argument
+#deep-extend
+# Calling Object.getOwnPropertyNames on proxy object
+#deep-freeze
+# Calling Object.getOwnPropertyNames on proxy object
+#deep-freeze-strict
+# No argument
+#defer-promise
+# No argument
+#defined
 depd
-deps-sort
+# Interactions happen after interaction with return value
+#deps-sort
 dir-resolve
 dirname-regex
 document-ready
