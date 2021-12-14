@@ -141,6 +141,17 @@ Maybe we can join the constraints of different symbolic execution paths to gener
 
 Or maybe it's easier to output the synthesized values as tests and have some other tool generate the types from these.
 
+##### Remarks (OHV 20211214)
+
+[Systematic Generation of Conformance Tests for JavaScript](https://arxiv.org/abs/2108.07075) explores how to generate test cases for untyped and unannotated JavaScript functions that achieve high coverage.
+Their approach is mostly sound.
+
+The downside is that it is quite heavyweight, and it generates an enormous amount of test cases - many of which are "incorrectly typed".
+
+The way our approach works currently is not geared towards outputting test cases that exercise the library function to a high degree of coverage.
+This requires you to reason about nasty stuff like relationships between values, which is solved by an SMT solver in the above paper.
+What our approach wants to do is to explore a lot of possible executions of the library, looks at how the input parameters are manipulated, and then come up with a type for the parameters based on some heuristics.
+
 ##### Postponed problems
 
 * How do we handle functions that schedule actions on the event loop to run after the function returns?
