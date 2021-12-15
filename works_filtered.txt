@@ -101,10 +101,13 @@ depd
 # Interactions happen after interaction with return value
 #deps-sort
 dir-resolve
-dirname-regex
+# No argument
+#dirname-regex
 document-ready
-dotdir-regex
-dotfile-regex
+# No argument
+#dotdir-regex
+# No argument
+#dotfile-regex
 dtype
 element-closest
 element-resize-detector
@@ -133,7 +136,8 @@ find-package-json
 flowjs
 format-util
 forwarded
-from
+# Async stuff
+#from
 get-func-name
 get-node-dimensions
 get-params
@@ -157,7 +161,8 @@ gulp-sort
 gunzip-maybe
 has
 has-symbols
-hash-sum
+# Causes infinite recursion in exploration?
+#hash-sum
 hashtag-regex
 hex-color-regex
 html-escape
