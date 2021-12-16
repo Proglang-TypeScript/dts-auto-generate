@@ -152,6 +152,11 @@ The way our approach works currently is not geared towards outputting test cases
 This requires you to reason about nasty stuff like relationships between values, which is solved by an SMT solver in the above paper.
 What our approach wants to do is to explore a lot of possible executions of the library, looks at how the input parameters are manipulated, and then come up with a type for the parameters based on some heuristics.
 
+As of 16/12/2012 the prototype tool is stable enough to handle the `test/run_all.sh` script and produce some meaningful output for many modules.
+A natural next step is to implement a comparison between the output of the prototype and the declaration file in DefinitelyTyped.
+This is mostly related to setting up the infrastructure, as we should be able to reuse the declaration file construction logic and comparison methods from `dts-generate`.
+
+
 ##### Postponed problems
 
 * How do we handle functions that schedule actions on the event loop to run after the function returns?
