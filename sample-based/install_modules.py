@@ -32,4 +32,5 @@ def install(module: str):
 
 with ThreadPoolExecutor(max_workers=8) as executor:
     for module in modules:
-        executor.submit(install, module)
+        if not module.startswith('#'):
+            executor.submit(install, module)

@@ -331,7 +331,8 @@ parse-filepath
 parse-github-url
 parse-glob
 parse-key
-parse-link-header
+# Crashes jalangi
+#parse-link-header
 parse-node-version
 parse-passwd
 parsecurrency
@@ -413,6 +414,7 @@ webpack-fail-plugin
 week
 weighted-random-object
 which-pm-runs
-win-version-info
+# Crashes jalangi
+#win-version-info
 wink-tokenizer
 xtend
