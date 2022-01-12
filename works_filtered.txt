@@ -6,7 +6,8 @@ abs-svg-path
 #ajv-merge-patch
 # Returns a function
 #apex.js
-api-error-handler
+# No argument
+#api-error-handler
 # Uses arguments
 #arr-diff
 arr-union
@@ -123,17 +124,22 @@ escape-latex
 escape-regexp
 expand-tilde
 express-async-wrap
-express-enforces-ssl
+# No argument
+#express-enforces-ssl
 express-flash-2
 express-request-id
-express-routes-versioning
-extend
+# No argument
+#express-routes-versioning
+# No argument
+#extend
 fast-isnumeric
 feather-route-matcher
 filesize-parser
-find-exec
+# No argument
+#find-exec
 find-package-json
-flowjs
+# No argument
+#flowjs
 format-util
 forwarded
 # Async stuff
@@ -145,9 +151,12 @@ git-add-remote
 git-user-email
 git-user-name
 glob-base
+glob-to-regexp
 global-paths
-globalthis
-globjoin
+# No argument
+#globalthis
+# No argument
+#globjoin
 graphql-fields
 gulp-bump
 gulp-change
@@ -155,15 +164,18 @@ gulp-flatten
 gulp-gzip
 gulp-intercept
 gulp-json-validator
-gulp-jsonminify
+# No argument
+#gulp-jsonminify
 gulp-rev-replace
 gulp-sort
 gunzip-maybe
 has
-has-symbols
+# No argument
+#has-symbols
 # Causes infinite recursion in exploration?
 #hash-sum
-hashtag-regex
+# No argument
+#hashtag-regex
 hex-color-regex
 html-escape
 humanize-ms
@@ -193,7 +205,8 @@ is-relative
 is-relative-path
 is-ssh
 is-string
-is-touch-device
+# No argument
+#is-touch-device
 is-unc-path
 is-url
 is-utf8
@@ -202,7 +215,8 @@ is-valid-path
 isarray
 iterate-iterator
 iterate-value
-jquery-ajax-chain
+# No argument
+#jquery-ajax-chain
 jquery-formatdatetime
 jquery-param
 js-string-escape
@@ -216,24 +230,35 @@ kind-of
 koa-cache-control
 koa-json
 kyujitai
-layzr.js
-lazypipe
+# No argument
+#layzr.js
+# No argument
+#lazypipe
 linesert
-local-ipv4-address
-lodash.attempt
-lodash.bindall
-lodash.castarray
+# No argument
+#local-ipv4-address
+# No argument
+#lodash.attempt
+# No argument
+#lodash.bindall
+# No argument
+#lodash.castarray
 lodash.compact
-lodash.concat
+# No argument
+#lodash.concat
 lodash.constant
-lodash.defer
-lodash.delay
+# No argument
+#lodash.defer
+# No argument
+#lodash.delay
 lodash.first
 lodash.flatten
 lodash.flattendeep
 lodash.flip
-lodash.flow
-lodash.flowright
+# No argument
+#lodash.flow
+# No argument
+#lodash.flowright
 lodash.frompairs
 lodash.head
 lodash.identity
@@ -299,17 +324,21 @@ loopbench
 looper
 map-to-obj
 markdown-it-lazy-headers
-math-random
+# No argument
+#math-random
 math-sign
 math-trunc
 memoizee
 merge-ranges
 mergerino
 mess
-micro-cors
+# No argument
+#micro-cors
 millisecond
-mock-raf
-mutexify
+# No argument
+#mock-raf
+# No argument
+#mutexify
 nanographql
 natural-sort
 newline-remove
@@ -321,7 +350,8 @@ omit
 on-wake-up
 one-time
 os-homedir
-os-tmpdir
+# No argument
+#os-tmpdir
 outliers
 palx
 parse-author
@@ -337,18 +367,22 @@ parse-node-version
 parse-passwd
 parsecurrency
 password-hash-and-salt
-path-regex
+# No argument
+#path-regex
 pause
 pinkyswear
 places
 poster-image
 pouch-redux-middleware
-pump
+# No argument
+#pump
 purl
-pushid
+# No argument
+#pushid
 qs-middleware
 raf-schd
-random-boolean
+# No argument
+#random-boolean
 random-normal
 random-string
 raven-for-redux
@@ -359,7 +393,8 @@ redact-secrets
 redux-sentry-middleware
 ref-struct-di
 ref-union-di
-registry-auth-token
+# No argument
+#registry-auth-token
 require-all
 retinajs
 right-align
@@ -386,7 +421,8 @@ stringify-author
 strip-color
 superagent-prefix
 svg4everybody
-tea-merge
+# No argument
+#tea-merge
 textr
 then-eos
 three-dat.gui
@@ -402,19 +438,26 @@ ttf2eot
 type-detect
 type-name
 typeof
-unc-path-regex
+# No argument
+#unc-path-regex
 unidecode
 urix
-url-join
+# No argument
+#url-join
 use-double-click
-use-prefers-color-scheme
+# No argument
+#use-prefers-color-scheme
 vali-date
 validate-objectid
-webpack-fail-plugin
+# No argument
+#webpack-fail-plugin
 week
 weighted-random-object
-which-pm-runs
+# No argument
+#which-pm-runs
 # Crashes jalangi
 #win-version-info
-wink-tokenizer
-xtend
+# No argument
+#wink-tokenizer
+# No argument
+#xtend
